@@ -1,4 +1,5 @@
-﻿using MNBarfolyam.MnbServiceReference;
+﻿using MNBarfolyam.Entities;
+using MNBarfolyam.MnbServiceReference;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,11 +14,14 @@ namespace MNBarfolyam
 {
     public partial class Form1 : Form
     {
+        private BindingList<RateData> Rates;
+
         public Form1()
         {
             InitializeComponent();
 
             elsofuggveny();
+            dataGridView1.DataSource = Rates;
 
         }
 
