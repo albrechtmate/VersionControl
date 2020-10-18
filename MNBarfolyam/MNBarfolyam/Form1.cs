@@ -23,8 +23,15 @@ namespace MNBarfolyam
         {
             InitializeComponent();
 
-            elsofuggveny();
+            RefreshData();
            
+        }
+
+        private void RefreshData()
+        {
+            Rates.Clear();
+
+            elsofuggveny();
             masodikfuggvenny();
             harmadikfuggveny();
         }
@@ -54,9 +61,9 @@ namespace MNBarfolyam
             var mnbService = new MNBArfolyamServiceSoapClient();
             var request = new GetExchangeRatesRequestBody()
             {
-                currencyNames = "EUR",
-                startDate = "2020-01-01",
-                endDate = "2020-06-30"
+                currencyNames = comboBox1.SelectedItem.ToString(),
+                startDate = dateTimePicker1.Value.ToString(),
+                endDate = dateTimePicker2.Value.ToString()
             };
             var response = mnbService.GetExchangeRates(request);
             result = response.GetExchangeRatesResult;
@@ -86,6 +93,21 @@ namespace MNBarfolyam
                 if (unit != 0)
                     rate.Value = value / unit;
             }
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
 }
