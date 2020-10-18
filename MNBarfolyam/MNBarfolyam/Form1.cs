@@ -16,7 +16,7 @@ namespace MNBarfolyam
 {
     public partial class Form1 : Form
     {
-        private BindingList<RateData> Rates;
+        BindingList<RateData> Rates = new BindingList<RateData>();
         public string result;
 
         public Form1()
@@ -50,6 +50,7 @@ namespace MNBarfolyam
 
         public void elsofuggveny()
         {
+            dataGridView1.DataSource = Rates;
             var mnbService = new MNBArfolyamServiceSoapClient();
             var request = new GetExchangeRatesRequestBody()
             {
@@ -59,7 +60,7 @@ namespace MNBarfolyam
             };
             var response = mnbService.GetExchangeRates(request);
             result = response.GetExchangeRatesResult;
-            dataGridView1.DataSource = Rates;
+            
         }
         public void masodikfuggvenny()
         {
