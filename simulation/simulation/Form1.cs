@@ -63,45 +63,45 @@ namespace simulation
 
             return population;
         }
-        public List<Person> GetBirthProbabilities(string csvpath)
+        public List<BirthProbability> GetBirthProbabilities(string csvpath)
         {
-            List<Person> population = new List<Person>();
+            List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
 
             using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
             {
                 while (!sr.EndOfStream)
                 {
                     var line = sr.ReadLine().Split(';');
-                    population.Add(new Person()
+                    BirthProbabilities.Add(new BirthProbability()
                     {
-                        BirthYear = int.Parse(line[0]),
-                        Gender = (Gender)Enum.Parse(typeof(Gender), line[1]),
-                        NbrOfChildren = int.Parse(line[2])
+                        Age = int.Parse(line[0]),
+                        gyermekSzam =int.Parse(line[1]),
+                        P = int.Parse(line[2])
                     });
                 }
             }
 
-            return population;
+            return BirthProbabilities;
         }
-        public List<Person> GetDeathProbabilities(string csvpath)
+        public List<DeathProbability> GetDeathProbabilities(string csvpath)
         {
-            List<Person> population = new List<Person>();
+            List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
 
             using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
             {
                 while (!sr.EndOfStream)
                 {
                     var line = sr.ReadLine().Split(';');
-                    population.Add(new Person()
+                    DeathProbabilities.Add(new DeathProbability()
                     {
-                        BirthYear = int.Parse(line[0]),
-                        Gender = (Gender)Enum.Parse(typeof(Gender), line[1]),
-                        NbrOfChildren = int.Parse(line[2])
+                        Gender = (Gender)Enum.Parse(typeof(Gender), line[0]),
+                        Age = int.Parse(line[1]),
+                        P = int.Parse(line[2])
                     });
                 }
             }
 
-            return population;
+            return DeathProbabilities;
         }
         private void SimStep(int year, Person person)
         {
