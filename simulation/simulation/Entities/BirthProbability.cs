@@ -8,7 +8,7 @@ namespace simulation.Entities
 {
     public class BirthProbability
     {
-        public int kor { get; set; }
+        public int Age { get; set; }
         public int gyermekSzam { get; set; }
         public double P { get; set; }
     }
