@@ -11,6 +11,12 @@ namespace Mikulas.Entitites
 {
     class Ball : Toy
     {
+        public SolidBrush BallColor { get; private set; }
+
+        public Ball(Color color)
+        {
+            BallColor = new SolidBrush(color);
+        }
 
         protected override void DrawImage(Graphics g)
         {

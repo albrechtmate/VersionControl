@@ -16,12 +16,29 @@ namespace Mikulas
     {
         private List<Toy>_toys = new List<Toy>();
 
+        private Toy _nextToy;
+
         private IToyFactory _factory;
         public IToyFactory Factory
         {
             get { return _factory; }
-            set { _factory = value; }
+            set
+            {
+                _factory = value;
+                DisplayNext();
+            }
         }
+
+        private void DisplayNext()
+        {
+            if (_nextToy != null)
+                Controls.Remove(_nextToy);
+            _nextToy = Factory.CreateNew();
+            _nextToy.Top = lblNext.Top + lblNext.Height + 20;
+            _nextToy.Left = lblNext.Left;
+            Controls.Add(_nextToy);
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -53,5 +70,25 @@ namespace Mikulas
             }
         }
 
+        private void CAR_Click(object sender, EventArgs e)
+        {
+            Factory = new CarFactory();
+        }
+
+        private void BALL_Click(object sender, EventArgs e)
+        {
+            Factory = new BallFactory();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var colorPicker = new ColorDialog();
+
+            colorPicker.Color = button.BackColor;
+            if (colorPicker.ShowDialog() != DialogResult.OK)
+                return;
+            button.BackColor = colorPicker.Color;
+        }
     }
 }
